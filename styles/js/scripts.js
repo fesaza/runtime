@@ -76,13 +76,20 @@
       var body = jQuery('body');
       var bodyposition = body.css('position');
       if(bodyposition != 'relative') {
-
+          
          if(!body.hasClass('left-side-collapsed')) {
              $(".ft-appengine-workspace-select").hide();
              body.addClass('left-side-collapsed');
             jQuery('.custom-nav ul').attr('style','');
             jQuery(this).addClass('menu-collapsed');
-            
+
+            var mq = window.matchMedia("(min-width: 800px)");
+            if (!mq.matches) {
+
+                jQuery(this).removeClass('menu-collapsed');
+                $(".sticky-left-side").hide()
+            }
+
          } else {
              $(".ft-appengine-workspace-select").show();
             body.removeClass('left-side-collapsed chat-view');
@@ -90,6 +97,11 @@
 
             jQuery(this).removeClass('menu-collapsed');
 
+            //wkh
+            var mq = window.matchMedia("(min-width: 800px)");
+            if (!mq.matches) {
+                $(".sticky-left-side").show()
+            }
          }
       } else {        
          if(body.hasClass('left-side-show'))
